@@ -40,8 +40,11 @@ if ! id "$usuario" &>/dev/null; then
 	adduser "$usuario"
 	usermod -a -G "$grupo" "$usuario"
 else
-	echo "el usuario ya existe, se agregara al grupo"
+	echo "El usuario ya existe, se agregara al grupo"
 	usermod -a -G "$grupo" "$usuario"
 fi
 
-
+#Cambiar la pertenencia del archivo
+chown "$usuario:$grupo" "$ruta"
+#Cambiar los permisos del aerchivo
+chmod 740 "$ruta"
