@@ -15,7 +15,7 @@ $proceso &
 PID=$!
 
 while kill -0 $PID 2>/dev/null; do
-    ps -p "$PID" -o %cpu,%mem --no-headers
+    ps -p "$PID" -o %cpu,%mem --no-headers | tee -a consumo.log
     sleep 1
 done
 
