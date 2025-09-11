@@ -1,14 +1,13 @@
 #!/bin/bash
 
-$ruta=$1
-if [ -z "$usuario" ]; then
-	echo "Debe agregar un directorio a evaluar"
-	exit 1
-fi
+directorio="/home/andresvirtual/Downloads"
+archivo_log="/home/andresvirtual/Documents/cambios.log"
 
-if [ ! -f "$ruta" ]; then
-	echo "La ruta del archivo no existe"
-        exit 3
-fi
+> "$archivo_log"
+inotifywait -m -r -e create -e modify -e delete "$directorio" --format '%w%f %e' |
+while read archivo evento
+do
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $evento en $archivo" >> "$archivo_log"
+done
 
 
