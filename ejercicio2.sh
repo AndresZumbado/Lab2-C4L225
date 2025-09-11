@@ -11,6 +11,8 @@ if [ -z "$(command -v $proceso)" ]; then
 	exit 2
 fi
 
+#Aqui se genera el archivo consumo.log para evitar inconvenientes con el programa y e archivo siempre exista y ademas elimine logs anteriores
+touch consumo.log
 $proceso &
 sleep 0.5
 PID=$!
